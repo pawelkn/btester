@@ -1,0 +1,21 @@
+name: Test btlib
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install requirements
+      run: pip install -r requirements.txt
+
+    - name: Test btlib
+      run: python -m unittest discover tests

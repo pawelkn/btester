@@ -1,0 +1,24 @@
+
+name: CodeCov
+
+on: [pull_request, push]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Install coverage
+        run: pip install coverage
+
+      - name: Generate Report
+        run: coverage run -m unittest discover -s tests/
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
