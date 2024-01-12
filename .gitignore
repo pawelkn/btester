@@ -1,0 +1,11 @@
+.vscode
+build
+dist
+idea
+credentials.json
+__pycache__
+.pytest_cache
+.coverage
+.venv
+*.pyc
+*.egg-info
