@@ -1,0 +1,30 @@
+[project]
+name = "btlib"
+version = "0.0.1"
+authors = [
+  { name="Paweł Knioła", email="pawel.kn@gmail.com" },
+]
+description = "Python backtest library optimized for testing portfolio performance across hundreds of tickers"
+keywords = [
+  "python", "python3", "quantitative", "analysis", "backtesting", "portfolio", "parallel", "algorithmic", "trading"
+]
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.7",      #Specify which python versions that you want to support
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12"
+]
+dependencies = [
+  "pandas>=0.22"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pawelkn/btlib"
+"Bug Tracker" = "https://github.com/pawelkn/btlib/issues"

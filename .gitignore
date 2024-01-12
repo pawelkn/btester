@@ -6,6 +6,6 @@ credentials.json
 __pycache__
 .pytest_cache
 .coverage
-.venv
+.venv*
 *.pyc
 *.egg-info
