@@ -64,6 +64,3 @@ class TestPosition(unittest.TestCase):
         self.assertAlmostEqual(position.profit_loss, 500.0)
         self.assertAlmostEqual(position.change_pct, 50.0)
         self.assertAlmostEqual(position.current_value, 1500.0)
-
-if __name__ == '__main__':
-    unittest.main()

@@ -47,11 +47,11 @@ class Strategy(ABC):
 
     @abstractmethod
     def init(self):
-        pass
+        """ Abstract method for initializing resources for the strategy """
 
     @abstractmethod
     def next(self, i: int, record: Dict[Hashable, Any]):
-        pass
+        """ Abstract method defining the core functionality of the strategy """
 
     def __init__(self):
         self.data = pd.DataFrame()

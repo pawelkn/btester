@@ -6,9 +6,10 @@ import unittest
 
 class CustomStrategy(Strategy):
     def init(self):
-        pass
+        """ Implementation for initialization """
+
     def next(self, i, record):
-        pass
+        """ Implementation for the core strategy logic """
 
 class TestStrategy(unittest.TestCase):
 
@@ -42,3 +43,9 @@ class TestStrategy(unittest.TestCase):
         strategy.cash = 100
         self.assertTrue(strategy.open(10, None))
         self.assertEqual(strategy.open_positions[0].position_size, 10)
+
+    # The close() method returns False if price is NaN or less than or equal to zero
+    def test_close_returns_false_if_price_or_size_invalid(self):
+        strategy = CustomStrategy()
+        self.assertFalse(strategy.close(nan))
+        self.assertFalse(strategy.close(0))

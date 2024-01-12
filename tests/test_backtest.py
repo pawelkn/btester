@@ -88,6 +88,3 @@ class TestBacktest(unittest.TestCase):
         pd.testing.assert_series_equal(result.returns, returns)
         self.assertEqual(result.trades, trades)
         self.assertEqual(result.open_positions, open_positions)
-
-if __name__ == '__main__':
-    unittest.main()
