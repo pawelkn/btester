@@ -81,7 +81,7 @@ class Strategy(ABC):
         else:
             open_cost = size * price * (1 + self.commission)
 
-        if self.cash < open_cost:
+        if isnan(size) or size <= .0 or self.cash < open_cost:
             return False
 
         position = Position(symbol=symbol, open_date=self.date, open_price=price, position_size=size)
@@ -160,7 +160,7 @@ class Backtest:
         self.commission = commission
 
         columns = data.columns
-        self.symbols = columns.levels[0].tolist() if isinstance(columns, pd.MultiIndex) else []
+        self.symbols = columns.get_level_values(0).unique().tolist() if isinstance(columns, pd.MultiIndex) else []
 
         self.records = data.to_dict('records')
         self.index = data.index.tolist()
