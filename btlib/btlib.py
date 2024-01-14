@@ -7,6 +7,23 @@ import pandas as pd
 
 @dataclass
 class Position:
+    """
+    Represents an open financial position.
+
+    Attributes:
+    - symbol: Optional[str] - Symbol of the financial instrument.
+    - open_date: Optional[datetime] - Date when the position was opened.
+    - last_date: Optional[datetime] - Date of the latest update to the position.
+    - open_price: float - Price at which the position was opened.
+    - last_price: float - Latest market price of the instrument.
+    - position_size: float - Size of the position.
+    - profit_loss: float - Cumulative profit or loss of the position.
+    - change_pct: float - Percentage change in price since opening the position.
+    - current_value: float - Current market value of the position.
+
+    Methods:
+    - update(last_date: datetime, last_price: float) - Update the position with the latest market data.
+    """
     symbol: Optional[str] = None
     open_date: Optional[datetime] = None
     last_date: Optional[datetime] = None
@@ -26,6 +43,21 @@ class Position:
 
 @dataclass
 class Trade:
+    """
+    Represents a completed financial transaction.
+
+    Attributes:
+    - symbol: Optional[str] - Symbol of the financial instrument.
+    - open_date: Optional[datetime] - Date when the trade was opened.
+    - close_date: Optional[datetime] - Date when the trade was closed.
+    - open_price: float - Price at which the trade was opened.
+    - close_price: float - Price at which the trade was closed.
+    - position_size: float - Size of the traded position.
+    - profit_loss: float - Cumulative profit or loss of the trade.
+    - change_pct: float - Percentage change in price during the trade.
+    - trade_commission: float - Commission paid for the trade.
+    - cumulative_return: float - Cumulative return after the trade.
+    """
     symbol: Optional[str] = None
     open_date: Optional[datetime] = None
     close_date: Optional[datetime] = None
@@ -39,11 +71,45 @@ class Trade:
 
 @dataclass
 class Result:
+    """
+    Container class for backtest results.
+
+    Attributes:
+    - returns: pd.Series - Time series of cumulative returns.
+    - trades: List[Trade] - List of completed trades.
+    - open_positions: List[Position] - List of remaining open positions.
+    """
     returns: pd.Series
     trades: List[Trade]
     open_positions: List[Position]
 
 class Strategy(ABC):
+    """
+    Abstract base class for implementing trading strategies.
+
+    Methods:
+    - init(self) - Abstract method for initializing resources for the strategy.
+    - next(self, i: int, record: Dict[Hashable, Any]) - Abstract method defining the core functionality of the strategy.
+
+    Attributes:
+    - data: pd.DataFrame - Historical market data.
+    - date: Optional[datetime] - Current date during backtesting.
+    - cash: float - Available cash for trading.
+    - commission: float - Commission rate for trades.
+    - symbols: List[str] - List of symbols in the market data.
+    - records: List[Dict[Hashable, Any]] - List of records representing market data.
+    - index: List[datetime] - List of dates corresponding to market data.
+    - returns: List[float] - List of cumulative returns during backtesting.
+    - trades: List[Trade] - List of completed trades during backtesting.
+    - open_positions: List[Position] - List of remaining open positions during backtesting.
+    - cumulative_return: float - Cumulative return of the strategy.
+    - cash_stock_value: float - Sum of cash and market value of open positions.
+
+    Methods:
+    - open(self, price: float, size: Optional[float] = None, symbol: Optional[str] = None) -> bool
+    - close(self, price: float, symbol: Optional[str] = None, position: Optional[Position] = None) -> bool
+    - _eval(*args, **kwargs) -> Result
+    """
 
     @abstractmethod
     def init(self):
@@ -72,6 +138,21 @@ class Strategy(ABC):
         self.cash_stock_value = .0
 
     def open(self, price: float, size: Optional[float] = None, symbol: Optional[str] = None):
+        """
+        Opens a new financial position based on the specified parameters.
+
+        Parameters:
+        - price: float - The price at which to open the position.
+        - size: Optional[float] - The size of the position. If not provided, it is calculated based on available cash.
+        - symbol: Optional[str] - Symbol of the financial instrument.
+
+        Returns:
+        - bool: True if the position was successfully opened, False otherwise.
+
+        This method calculates the cost of opening a new position, checks if the specified size is feasible given
+        available cash, and updates the strategy's open positions accordingly. It returns True if the position is
+        successfully opened, and False otherwise.
+        """
         if isnan(price) or price <= 0 or (size is not None and (isnan(size) or size <= .0)):
             return False
 
@@ -94,6 +175,22 @@ class Strategy(ABC):
         return True
 
     def close(self, price: float, symbol: Optional[str] = None, position: Optional[Position] = None):
+        """
+        Closes an existing financial position based on the specified parameters.
+
+        Parameters:
+        - price: float - The price at which to close the position.
+        - symbol: Optional[str] - Symbol of the financial instrument.
+        - position: Optional[Position] - The specific position to close. If not provided, closes all positions for the symbol.
+
+        Returns:
+        - bool: True if the position(s) were successfully closed, False otherwise.
+
+        This method calculates the cost of closing a position, updates the strategy's cumulative return, and records the
+        trade details. If a specific position is provided, only that position is closed. If no position is specified,
+        all open positions for the specified symbol are closed. It returns True if the position(s) is successfully
+        closed, and False otherwise.
+        """
         if isnan(price) or price <= 0:
             return False
 
@@ -146,7 +243,18 @@ class Strategy(ABC):
         )
 
 class Backtest:
+    """
+    Class for running a backtest on a given strategy using historical market data.
 
+    Attributes:
+    - strategy: Type[Strategy] - Type of strategy to be backtested.
+    - data: pd.DataFrame - Historical market data.
+    - cash: float - Initial cash available for trading.
+    - commission: float - Commission rate for trades.
+
+    Methods:
+    - run(*args, **kwargs) - Run the backtest and return the results.
+    """
     def __init__(self,
                  strategy: Type[Strategy],
                  data: pd.DataFrame,
