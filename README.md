@@ -5,14 +5,15 @@
 `btlib` is a Python framework is optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Classes](#classes)
-  - [`Position` Class](#position-class)
-  - [`Trade` Class](#trade-class)
-  - [`Result` Class](#result-class)
-  - [`Strategy` Class](#strategy-class)
-  - [`Backtest` Class](#backtest-class)
+  - [Position Class](#position-class)
+  - [Trade Class](#trade-class)
+  - [Result Class](#result-class)
+  - [Strategy Class](#strategy-class-abstract-base-class)
+  - [Backtest Class](#backtest-class)
 - [Example Usage](#example-usage)
 - [Examples](#examples)
 
