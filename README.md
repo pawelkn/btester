@@ -2,7 +2,7 @@
 
 [![Test btlib](https://github.com/pawelkn/btlib/actions/workflows/test-btlib.yml/badge.svg)](https://github.com/pawelkn/btlib/actions/workflows/test-btlib.yml) [![PyPi](https://img.shields.io/pypi/v/btlib.svg)](https://pypi.python.org/pypi/btlib/) [![Downloads](https://img.shields.io/pypi/dm/btlib)](https://pypi.python.org/pypi/btlib/) [![Codecov](https://codecov.io/gh/pawelkn/btlib/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelkn/btlib/)
 
-`btlib` is a Python framework is optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
+`btlib` is a Python framework optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
 ## Table of Contents
 
