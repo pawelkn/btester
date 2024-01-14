@@ -108,7 +108,6 @@ class Strategy(ABC):
     Methods:
     - open(self, price: float, size: Optional[float] = None, symbol: Optional[str] = None) -> bool
     - close(self, price: float, symbol: Optional[str] = None, position: Optional[Position] = None) -> bool
-    - _eval(*args, **kwargs) -> Result
     """
 
     @abstractmethod
@@ -217,7 +216,7 @@ class Strategy(ABC):
 
         return True
 
-    def _eval(self, *args, **kwargs):
+    def __eval(self, *args, **kwargs):
         self.cumulative_return = self.cash
         self.cash_stock_value = .0
 
@@ -283,4 +282,4 @@ class Backtest:
         strategy.records = self.records
         strategy.index = self.index
 
-        return strategy._eval(*args, **kwargs)
+        return strategy._Strategy__eval(*args, **kwargs)
