@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name="btlib",
+    name="btester",
     author='Paweł Knioła',
     author_email='pawel.kn@gmail.com',
     description='Python backtest library optimized for testing portfolio performance across hundreds of tickers',
     long_description=open('README.md', encoding='utf-8').read(),
     license='MIT',
     keywords='python python3 quantitative analysis backtesting portfolio parallel algorithmic trading',
-    url='https://github.com/pawelkn/btlib',
+    url='https://github.com/pawelkn/btester',
     classifiers=[
         "Operating System :: OS Independent",
         "License :: OSI Approved :: MIT License",
@@ -21,5 +21,5 @@ setup(
     ],
     python_requires='>=3.7',
     version="0.0.1",
-    packages=['btlib'],
+    packages=['btester'],
 )

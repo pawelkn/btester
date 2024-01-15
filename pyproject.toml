@@ -1,5 +1,5 @@
 [project]
-name = "btlib"
+name = "btester"
 version = "0.0.1"
 authors = [
   { name="Paweł Knioła", email="pawel.kn@gmail.com" },
@@ -26,5 +26,5 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pawelkn/btlib"
-"Bug Tracker" = "https://github.com/pawelkn/btlib/issues"
+"Homepage" = "https://github.com/pawelkn/btester"
+"Bug Tracker" = "https://github.com/pawelkn/btester/issues"

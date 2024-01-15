@@ -1,4 +1,4 @@
-name: Test btlib
+name: Test btester
 
 on:
   push:
@@ -17,5 +17,5 @@ jobs:
     - name: Install requirements
       run: pip install -r requirements.txt
 
-    - name: Test btlib
+    - name: Test btester
       run: python -m unittest discover tests

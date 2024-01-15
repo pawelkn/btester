@@ -2,7 +2,7 @@
 .. moduleauthor:: Paweł Knioła <pawel.kn@gmail.com>
 """
 
-name = "btlib"
+name = "btester"
 __version__ = "0.0.1"
 
-from .btlib import *
+from .btester import *

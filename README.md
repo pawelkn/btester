@@ -1,8 +1,8 @@
-# btlib -   Trading Strategy Backtesting Framework
+# btester -   Trading Strategy Backtesting Framework
 
-[![Test btlib](https://github.com/pawelkn/btlib/actions/workflows/test-btlib.yml/badge.svg)](https://github.com/pawelkn/btlib/actions/workflows/test-btlib.yml) [![PyPi](https://img.shields.io/pypi/v/btlib.svg)](https://pypi.python.org/pypi/btlib/) [![Downloads](https://img.shields.io/pypi/dm/btlib)](https://pypi.python.org/pypi/btlib/) [![Codecov](https://codecov.io/gh/pawelkn/btlib/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelkn/btlib/)
+[![Test btester](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml/badge.svg)](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml) [![PyPi](https://img.shields.io/pypi/v/btester.svg)](https://pypi.python.org/pypi/btester/) [![Downloads](https://img.shields.io/pypi/dm/btester)](https://pypi.python.org/pypi/btester/) [![Codecov](https://codecov.io/gh/pawelkn/btester/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelkn/btester/)
 
-`btlib` is a Python framework optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
+`btester` is a Python framework optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
 ## Table of Contents
 
@@ -19,11 +19,11 @@
 
 ## Installation
 
-To use `btlib`, clone the repository and install the required dependencies:
+To use `btester`, clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/pawelkn/btlib.git
-cd btlib
+git clone https://github.com/pawelkn/btester.git
+cd btester
 pip install -r requirements.txt
 ```
 
@@ -62,8 +62,8 @@ Responsible for running a backtest on a given strategy using historical market d
 ## Example Usage
 
 ```python
-# Example usage of the btlib
-from btlib import Strategy, Backtest
+# Example usage of the btester
+from btester import Strategy, Backtest
 import pandas as pd
 
 # Define a custom strategy by inheriting from the abstract Strategy class
@@ -92,7 +92,7 @@ remaining_positions = result.open_positions
 
 ## Examples
 
-Check out the examples in the `examples` directory for additional use cases and demonstrations. The examples cover various scenarios and strategies to help you understand the versatility of the `btlib`.
+Check out the examples in the `examples` directory for additional use cases and demonstrations. The examples cover various scenarios and strategies to help you understand the versatility of the `btester`.
 
 - [Example 1: Single Asset Moving Average Crossover Strategy](examples/single-asset-ma-crossover.ipynb)
 - [Example 2: Multiple Assets Moving Average Crossover Strategy](examples/multiple-assets-ma-crossover.ipynb)

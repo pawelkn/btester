@@ -1,5 +1,5 @@
 
-from btlib import Strategy
+from btester import Strategy
 from math import nan, inf
 
 import unittest

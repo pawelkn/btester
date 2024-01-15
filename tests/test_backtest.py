@@ -1,4 +1,4 @@
-from btlib import Trade, Position, Strategy, Backtest
+from btester import Trade, Position, Strategy, Backtest
 import pandas as pd
 
 import unittest

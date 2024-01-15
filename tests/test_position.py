@@ -1,4 +1,4 @@
-from btlib import Position
+from btester import Position
 from datetime import datetime
 import math
 
