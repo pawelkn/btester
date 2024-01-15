@@ -4,7 +4,7 @@ version = "0.0.1"
 authors = [
   { name="Paweł Knioła", email="pawel.kn@gmail.com" },
 ]
-description = "Python backtest library optimized for testing portfolio performance across hundreds of tickers"
+description = "Python framework optimized for running backtests on multiple assetss"
 keywords = [
   "python", "python3", "quantitative", "analysis", "backtesting", "portfolio", "parallel", "algorithmic", "trading"
 ]

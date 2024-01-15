@@ -4,7 +4,7 @@ setup(
     name="btester",
     author='Paweł Knioła',
     author_email='pawel.kn@gmail.com',
-    description='Python backtest library optimized for testing portfolio performance across hundreds of tickers',
+    description='Python framework optimized for running backtests on multiple assets',
     long_description=open('README.md', encoding='utf-8').read(),
     license='MIT',
     keywords='python python3 quantitative analysis backtesting portfolio parallel algorithmic trading',

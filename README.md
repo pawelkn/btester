@@ -19,12 +19,10 @@
 
 ## Installation
 
-To use `btester`, clone the repository and install the required dependencies:
+You can install `btester` using pip. Simply run the following command:
 
 ```bash
-git clone https://github.com/pawelkn/btester.git
-cd btester
-pip install -r requirements.txt
+pip install btester
 ```
 
 ## Usage
