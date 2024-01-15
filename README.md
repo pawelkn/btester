@@ -4,19 +4,6 @@
 
 `btester` is a Python framework optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Classes](#classes)
-  - [Position Class](#position-class)
-  - [Trade Class](#trade-class)
-  - [Result Class](#result-class)
-  - [Strategy Class](#strategy-class-abstract-base-class)
-  - [Backtest Class](#backtest-class)
-- [Example Usage](#example-usage)
-- [Examples](#examples)
-
 ## Installation
 
 You can install `btester` using pip. Simply run the following command:
@@ -92,9 +79,9 @@ remaining_positions = result.open_positions
 
 Check out the examples in the `examples` directory for additional use cases and demonstrations. The examples cover various scenarios and strategies to help you understand the versatility of the `btester`.
 
-- [Example 1: Single Asset Moving Average Crossover Strategy](examples/single-asset-ma-crossover.ipynb)
-- [Example 2: Multiple Assets Moving Average Crossover Strategy](examples/multiple-assets-ma-crossover.ipynb)
-- [Example 3: Single Asset Breakout Strategy](examples/single-asset-brakeout.ipynb)
-- [Example 4: Multiple Assets Breakout Strategy](examples/multiple-assets-brakeout.ipynb)
+- [Example 1: Single Asset Moving Average Crossover Strategy](https://github.com/pawelkn/btester/blob/master/examples/single-asset-ma-crossover.ipynb)
+- [Example 2: Multiple Assets Moving Average Crossover Strategy](https://github.com/pawelkn/btester/blob/master/examples/multiple-assets-ma-crossover.ipynb)
+- [Example 3: Single Asset Breakout Strategy](https://github.com/pawelkn/btester/blob/master/examples/single-asset-brakeout.ipynb)
+- [Example 4: Multiple Assets Breakout Strategy](https://github.com/pawelkn/btester/blob/master/examples/multiple-assets-brakeout.ipynb)
 
 Feel free to explore and adapt these examples to suit your specific needs and trading strategies.
