@@ -22,28 +22,6 @@ pip install btester
 
 4. Run the backtest using the `run` method, which returns a `Result` object containing backtest results.
 
-## Classes
-
-### `Position` Class
-
-Represents an open financial position with attributes such as symbol, open date, open price, and current value. It allows for updating the position based on the latest market data.
-
-### `Trade` Class
-
-Represents a completed financial transaction, including details like symbol, open and close dates, open and close prices, position size, profit/loss, and trade commission.
-
-### `Result` Class
-
-A container class holding the results of a backtest, including returns, a list of trades, and a list of open positions.
-
-### `Strategy` Class (Abstract Base Class)
-
-An abstract base class that defines the structure for implementing trading strategies. It includes methods for initialization, the core strategy logic, opening positions, and closing positions.
-
-### `Backtest` Class
-
-Responsible for running a backtest on a given strategy using historical market data.
-
 ## Example Usage
 
 ```python
