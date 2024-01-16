@@ -103,7 +103,7 @@ class Strategy(ABC):
     - trades: List[Trade] - List of completed trades during backtesting.
     - open_positions: List[Position] - List of remaining open positions during backtesting.
     - cumulative_return: float - Cumulative return of the strategy.
-    - cash_stock_value: float - Sum of cash and market value of open positions.
+    - assets_value: float - Market value of open positions.
 
     Methods:
     - open(self, price: float, size: Optional[float] = None, symbol: Optional[str] = None) -> bool
@@ -112,11 +112,59 @@ class Strategy(ABC):
 
     @abstractmethod
     def init(self):
-        """ Abstract method for initializing resources for the strategy """
+        """
+        Abstract method for initializing resources and parameters for the strategy.
+
+        This method is called once at the beginning of the backtest to perform any necessary setup or configuration
+        for the trading strategy. It allows the strategy to initialize variables, set parameters, or load external data
+        needed for the strategy's functionality.
+
+        Parameters:
+        - *args: Additional positional arguments that can be passed during initialization.
+        - **kwargs: Additional keyword arguments that can be passed during initialization.
+
+        Example:
+        ```python
+        def init(self, buy_period: int, sell_period: int):
+            self.buy_signal = {}
+            self.sell_signal = {}
+
+            for symbol in self.symbols:
+                self.buy_signal[symbol] = UpBreakout(self.data[(symbol,'Close')], buy_period)
+                self.sell_signal[symbol] = DownBreakout(self.data[(symbol,'Close')], sell_period)
+        ```
+
+        Note:
+        It is recommended to define the expected parameters and their default values within the `init` method
+        to allow flexibility and customization when initializing the strategy.
+        """
 
     @abstractmethod
     def next(self, i: int, record: Dict[Hashable, Any]):
-        """ Abstract method defining the core functionality of the strategy """
+        """
+        Abstract method defining the core functionality of the strategy for each time step.
+
+        This method is called iteratively for each time step during the backtest, allowing the strategy to make
+        decisions based on the current market data represented by the 'record'. It defines the core logic of the
+        trading strategy, such as generating signals, managing positions, and making trading decisions.
+
+        Parameters:
+        - i (int): Index of the current time step.
+        - record (Dict[Hashable, Any]): Dictionary representing the market data at the current time step.
+          The keys can include symbols, and the values can include relevant market data (e.g., OHLC prices).
+
+        Example:
+        ```python
+        def next(self, i, record):
+            for symbol in self.symbols:
+                if self.buy_signal[symbol][i-1]:
+                    self.open(symbol=symbol, price=record[(symbol,'Open')], size=self.positionSize(record[(symbol,'Open')]))
+
+            for position in self.open_positions[:]:
+                if self.sell_signal[position.symbol][i-1]:
+                    self.close(position=position, price=record[(position.symbol,'Open')])
+        ```
+        """
 
     def __init__(self):
         self.data = pd.DataFrame()
@@ -134,7 +182,7 @@ class Strategy(ABC):
         self.open_positions: List[Position] = []
 
         self.cumulative_return = self.cash
-        self.cash_stock_value = .0
+        self.assets_value = .0
 
     def open(self, price: float, size: Optional[float] = None, symbol: Optional[str] = None):
         """
@@ -167,7 +215,7 @@ class Strategy(ABC):
         position = Position(symbol=symbol, open_date=self.date, open_price=price, position_size=size)
         position.update(last_date=self.date, last_price=price)
 
-        self.cash_stock_value += position.current_value
+        self.assets_value += position.current_value
         self.cash -= open_cost
 
         self.open_positions.extend([position])
@@ -198,7 +246,7 @@ class Strategy(ABC):
                 if position.symbol == symbol:
                     self.close(position=position, price=price)
         else:
-            self.cash_stock_value -= position.current_value
+            self.assets_value -= position.current_value
             position.update(last_date=self.date, last_price=price)
 
             trade_commission = (position.open_price + position.last_price) * position.position_size * self.commission
@@ -218,7 +266,7 @@ class Strategy(ABC):
 
     def __eval(self, *args, **kwargs):
         self.cumulative_return = self.cash
-        self.cash_stock_value = .0
+        self.assets_value = .0
 
         self.init(*args, **kwargs)
 
@@ -232,8 +280,8 @@ class Strategy(ABC):
                 if last_price > 0:
                     position.update(last_date=self.date, last_price=last_price)
 
-            self.cash_stock_value = sum(position.current_value for position in self.open_positions)
-            self.returns.append(self.cash + self.cash_stock_value)
+            self.assets_value = sum(position.current_value for position in self.open_positions)
+            self.returns.append(self.cash + self.assets_value)
 
         return Result(
             returns=pd.Series(index=self.index, data=self.returns, dtype=float),
