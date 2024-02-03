@@ -2,7 +2,7 @@
 
 [![Test btester](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml/badge.svg)](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml) [![PyPi](https://img.shields.io/pypi/v/btester.svg)](https://pypi.python.org/pypi/btester/) [![Downloads](https://img.shields.io/pypi/dm/btester)](https://pypi.python.org/pypi/btester/) [![Codecov](https://codecov.io/gh/pawelkn/btester/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelkn/btester/)
 
-`btester` is a Python framework optimized for running backtests on multiple assets portfolio.
+`btester` is a Python framework optimized for running backtests on multiple asset portfolios.
 
 It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
