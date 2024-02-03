@@ -1,8 +1,10 @@
-# btester -   Trading Strategy Backtesting Framework
+# btester -   Multi-Assets Backtesting Framework
 
 [![Test btester](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml/badge.svg)](https://github.com/pawelkn/btester/actions/workflows/test-btester.yml) [![PyPi](https://img.shields.io/pypi/v/btester.svg)](https://pypi.python.org/pypi/btester/) [![Downloads](https://img.shields.io/pypi/dm/btester)](https://pypi.python.org/pypi/btester/) [![Codecov](https://codecov.io/gh/pawelkn/btester/branch/master/graph/badge.svg)](https://codecov.io/gh/pawelkn/btester/)
 
-`btester` is a Python framework optimized for running backtests on multiple assets and supports full portfolio backtesting. It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
+`btester` is a Python framework optimized for running backtests on multiple assets portfolio.
+
+It provides tools for backtesting trading strategies based on historical market data. The framework includes classes for managing financial positions, completed trades, and a flexible abstract base class for implementing custom trading strategies.
 
 ## Installation
 
@@ -57,8 +59,8 @@ remaining_positions = result.open_positions
 
 Check out the examples in the `examples` directory for additional use cases and demonstrations. The examples cover various scenarios and strategies to help you understand the versatility of the `btester`.
 
-- [Example 1: Multiple Assets Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multiple-assets-ma-crossover.ipynb)
-- [Example 2: Multiple Assets Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multiple-assets-brakeout.ipynb)
+- [Example 1: Multi-Assets Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-ma-crossover.ipynb)
+- [Example 2: Multi-Assets Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-brakeout.ipynb)
 - [Example 3: Single Asset Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-ma-crossover.ipynb)
 - [Example 4: Single Asset Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-brakeout.ipynb)
 
