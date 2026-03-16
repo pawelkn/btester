@@ -17,6 +17,7 @@ class Position:
     - open_price: float - Price at which the position was opened.
     - last_price: float - Latest market price of the instrument.
     - position_size: float - Size of the position.
+    - leverage: float - Leverage factor applied to the position.
     - profit_loss: float - Cumulative profit or loss of the position.
     - change_pct: float - Percentage change in price since opening the position.
     - current_value: float - Current market value of the position.
@@ -30,6 +31,7 @@ class Position:
     open_price: float = nan
     last_price: float = nan
     position_size: float = nan
+    leverage: float = nan
     profit_loss: float = nan
     change_pct: float = nan
     current_value: float = nan
@@ -37,9 +39,9 @@ class Position:
     def update(self, last_date: datetime, last_price: float):
         self.last_date = last_date
         self.last_price = last_price
-        self.profit_loss = (self.last_price - self.open_price) * self.position_size
+        self.profit_loss = (self.last_price - self.open_price) * self.position_size * self.leverage
         self.change_pct = (self.last_price / self.open_price - 1) * 100
-        self.current_value = self.open_price * self.position_size + self.profit_loss
+        self.current_value = self.open_price * abs(self.position_size) + self.profit_loss
 
 @dataclass
 class Trade:
@@ -53,6 +55,7 @@ class Trade:
     - open_price: float - Price at which the trade was opened.
     - close_price: float - Price at which the trade was closed.
     - position_size: float - Size of the traded position.
+    - leverage: float - Leverage factor applied to the trade.
     - profit_loss: float - Cumulative profit or loss of the trade.
     - change_pct: float - Percentage change in price during the trade.
     - trade_commission: float - Commission paid for the trade.
@@ -64,6 +67,7 @@ class Trade:
     open_price: float = nan
     close_price: float = nan
     position_size: float = nan
+    leverage: float = nan
     profit_loss: float = nan
     change_pct: float = nan
     trade_commission: float = nan
@@ -96,6 +100,7 @@ class Strategy(ABC):
     - date: Optional[datetime] - Current date during backtesting.
     - cash: float - Available cash for trading.
     - commission: float - Commission rate for trades.
+    - leverage: float - Leverage factor for trading.
     - symbols: List[str] - List of symbols in the market data.
     - records: List[Dict[Hashable, Any]] - List of records representing market data.
     - index: List[datetime] - List of dates corresponding to market data.
@@ -171,6 +176,7 @@ class Strategy(ABC):
         self.date = None
         self.cash = .0
         self.commission = .0
+        self.leverage = 1.0
 
         self.symbols: List[str] = []
 
@@ -200,19 +206,19 @@ class Strategy(ABC):
         available cash, and updates the strategy's open positions accordingly. It returns True if the position is
         successfully opened, and False otherwise.
         """
-        if isnan(price) or price <= 0 or (size is not None and (isnan(size) or size <= .0)):
+        if isnan(price) or price <= 0 or (size is not None and (isnan(size) or size == .0)):
             return False
 
         if size is None:
             size = self.cash / (price * (1 + self.commission))
             open_cost = self.cash
         else:
-            open_cost = size * price * (1 + self.commission)
+            open_cost = abs(size) * price * (1 + self.commission)
 
-        if isnan(size) or size <= .0 or self.cash < open_cost:
+        if isnan(size) or size == .0 or self.cash < open_cost:
             return False
 
-        position = Position(symbol=symbol, open_date=self.date, open_price=price, position_size=size)
+        position = Position(symbol=symbol, open_date=self.date, open_price=price, position_size=size, leverage=self.leverage)
         position.update(last_date=self.date, last_price=price)
 
         self.assets_value += position.current_value
@@ -249,17 +255,17 @@ class Strategy(ABC):
             self.assets_value -= position.current_value
             position.update(last_date=self.date, last_price=price)
 
-            trade_commission = (position.open_price + position.last_price) * position.position_size * self.commission
+            trade_commission = (position.open_price + position.last_price) * abs(position.position_size) * self.commission
             self.cumulative_return += position.profit_loss - trade_commission
 
             trade = Trade(position.symbol, position.open_date, position.last_date, position.open_price,
-                position.last_price, position.position_size, position.profit_loss, position.change_pct,
-                trade_commission, self.cumulative_return)
+                position.last_price, position.position_size, position.leverage, position.profit_loss, 
+                position.change_pct, trade_commission, self.cumulative_return)
 
             self.trades.extend([trade])
             self.open_positions.remove(position)
 
-            close_cost = position.last_price * position.position_size * self.commission
+            close_cost = position.last_price * abs(position.position_size) * self.commission
             self.cash += position.current_value - close_cost
 
         return True
@@ -298,6 +304,7 @@ class Backtest:
     - data: pd.DataFrame - Historical market data.
     - cash: float - Initial cash available for trading.
     - commission: float - Commission rate for trades.
+    - leverage: float - Leverage factor for trading.
 
     Methods:
     - run(*args, **kwargs) - Run the backtest and return the results.
@@ -306,13 +313,15 @@ class Backtest:
                  strategy: Type[Strategy],
                  data: pd.DataFrame,
                  cash: float = 10_000,
-                 commission: float = .0
+                 commission: float = .0,
+                 leverage: float = 1.0
                  ):
 
         self.strategy = strategy
         self.data = data
         self.cash = cash
         self.commission = commission
+        self.leverage = leverage
 
         columns = data.columns
         self.symbols = columns.get_level_values(0).unique().tolist() if isinstance(columns, pd.MultiIndex) else []
@@ -325,6 +334,7 @@ class Backtest:
         strategy.data = self.data
         strategy.cash = self.cash
         strategy.commission = self.commission
+        strategy.leverage = self.leverage
 
         strategy.symbols = self.symbols
         strategy.records = self.records
