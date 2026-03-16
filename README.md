@@ -46,7 +46,7 @@ data = pd.read_csv('historical_data.csv', parse_dates=['Date'])
 data.set_index('Date', inplace=True)
 
 # Initialize and run the backtest
-backtest = Backtest(strategy=MyStrategy, data=data, cash=10000, commission=0.01)
+backtest = Backtest(strategy=MyStrategy, data=data, cash=10000, leverage=1.0, commission=0.01)
 result = backtest.run()
 
 # Access backtest results
@@ -63,5 +63,6 @@ Check out the examples in the `examples` directory for additional use cases and 
 - [Example 2: Multi-Assets Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-brakeout.ipynb)
 - [Example 3: Single Asset Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-ma-crossover.ipynb)
 - [Example 4: Single Asset Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-brakeout.ipynb)
+- [Example 5: Index Short-Long Day Trading Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/index-short-long-day-trading.ipynb)
 
 Feel free to explore and adapt these examples to suit your specific needs and trading strategies.
