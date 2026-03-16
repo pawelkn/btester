@@ -51,8 +51,10 @@ class TestPosition(unittest.TestCase):
         open_date = datetime(2021, 1, 1)
         open_price = 100.0
         position_size = 10.0
+        leverage = 1.0
 
-        position = Position(symbol=symbol, open_date=open_date, open_price=open_price, position_size=position_size)
+        position = Position(symbol=symbol, open_date=open_date, open_price=open_price, 
+                            position_size=position_size, leverage=leverage)
 
         last_date = datetime(2021, 1, 2)
         last_price = 150.0

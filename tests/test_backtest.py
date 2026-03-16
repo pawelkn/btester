@@ -61,7 +61,7 @@ class TestBacktest(unittest.TestCase):
         returns = pd.Series(index=SINGLE_ASSET_DATA.index, data=[9900.990099009901, 19801.980198019803, 29405.940594059408])
 
         trades = [Trade(symbol=None, open_date='2023-10-18', close_date='2023-10-20', open_price=100.0,
-            close_price=300.0, position_size=99.00990099009901, profit_loss=19801.980198019803, change_pct=200.0,
+            close_price=300.0, position_size=99.00990099009901, leverage=1.0, profit_loss=19801.980198019803, change_pct=200.0,
             trade_commission=396.03960396039605, cumulative_return=29405.940594059408)]
 
         open_positions = []
@@ -78,11 +78,11 @@ class TestBacktest(unittest.TestCase):
         returns = pd.Series(index=MULTIPLE_ASSETS_DATA.index, data=[9990.0, 10941.65, 11906.65])
 
         trades = [Trade(symbol='AAA', open_date='2023-10-18', close_date='2023-10-20', open_price=100.0,
-            close_price=300.0, position_size=10, profit_loss=2000.0, change_pct=200.0,
+            close_price=300.0, position_size=10, leverage=1.0, profit_loss=2000.0, change_pct=200.0,
             trade_commission=40.0, cumulative_return=11960.0)]
 
         open_positions = [Position(symbol='BBB', open_date='2023-10-19', last_date='2023-10-20', open_price=2835.0,
-            last_price=2810.0, position_size=1, profit_loss=-25.0, change_pct=-0.881834215167554,
+            last_price=2810.0, position_size=1, leverage=1.0, profit_loss=-25.0, change_pct=-0.881834215167554,
             current_value=2810.0)]
 
         pd.testing.assert_series_equal(result.returns, returns)

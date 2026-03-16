@@ -64,7 +64,7 @@ class TestStrategy(unittest.TestCase):
         self.assertEqual(strategy.trades, [])
         self.assertEqual(strategy.open_positions, [
             Position(symbol=None, open_date=None, last_date=None, open_price=10, last_price=10,
-                     position_size=10.0, profit_loss=0.0, change_pct=0.0, current_value=100.0)
+                     position_size=10.0, leverage=1.0, profit_loss=0.0, change_pct=0.0, current_value=100.0)
         ])
         self.assertEqual(strategy.assets_value, 100)
 
@@ -72,7 +72,7 @@ class TestStrategy(unittest.TestCase):
         self.assertEqual(strategy.cash, 200)
         self.assertEqual(strategy.trades, [
             Trade(symbol=None, open_date=None, close_date=None, open_price=10, close_price=20,
-                  position_size=10.0, profit_loss=100.0, change_pct=100.0, trade_commission=0.0,
+                  position_size=10.0, leverage=1.0, profit_loss=100.0, change_pct=100.0, trade_commission=0.0,
                   cumulative_return=100.0)
         ])
         self.assertEqual(strategy.open_positions, [])
