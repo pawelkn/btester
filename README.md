@@ -59,10 +59,10 @@ remaining_positions = result.open_positions
 
 Check out the examples in the `examples` directory for additional use cases and demonstrations. The examples cover various scenarios and strategies to help you understand the versatility of the `btester`.
 
-- [Example 1: Multi-Assets Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-ma-crossover.ipynb)
-- [Example 2: Multi-Assets Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-brakeout.ipynb)
-- [Example 3: Single Asset Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-ma-crossover.ipynb)
-- [Example 4: Single Asset Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-brakeout.ipynb)
+- [Example 1: Multi-Assets Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-brakeout.ipynb)
+- [Example 2: Multi-Assets Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/multi-assets-ma-crossover.ipynb)
+- [Example 3: Single Asset Breakout Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-brakeout.ipynb)
+- [Example 4: Single Asset Moving Average Crossover Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/single-asset-ma-crossover.ipynb)
 - [Example 5: Index Short-Long Day Trading Strategy](https://colab.research.google.com/github/pawelkn/btester/blob/master/examples/index-short-long-day-trading.ipynb)
 
 Feel free to explore and adapt these examples to suit your specific needs and trading strategies.
